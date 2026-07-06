@@ -1,0 +1,57 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{% static 'css/styleAchat.css' %}?v=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Document</title>
+</head>
+<body>
+     <div class="sidebar">
+        <div class="logo"></div>
+            <ul class="menu">
+                <li ">
+                    <a href="{%url 'acceuil'%}">
+                      <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>   
+                </li>
+                 <li>
+                    <a href="{%url 'achat' %}">
+                      <i class="fas fa-chart-bar"></i>
+                        <span>Achat de devises</span>
+                    </a>   
+                </li>
+                 <li class="activate">
+                    <a href="{% url 'vente' %}">
+                      <i class="fas fa-chart-bar"></i>
+                        <span>Vente de devises</span>
+                    </a>   
+                </li>
+                 <li>
+                    <a href="#">
+                      <i class="fas fa-briefcase"></i>
+                        <span>Attestation</span>
+                    </a>   
+                </li>
+                <h2>{{user.username}}!</h2>  
+                 <li class="logout">
+                    <a href="{%url 'deconnexion'%}">
+                      <i class="fas fa-sign-out-alt"></i>
+                        <span>Deconnexion</span>
+                    </a>   
+                </li>
+            </ul>
+    </div>
+     <div class="main--container ">
+        <div class="header--wrapper">
+            <div class="header--tittle">
+                <span>Vente de  devises</span>
+                <h2>Salut</h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

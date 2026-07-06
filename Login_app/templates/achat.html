@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achat de devises</title>
+
+    <link rel="stylesheet" href="{% static 'css/styleAchat.css' %}?v=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <div class="logo"></div>
+
+    <ul class="menu">
+
+        <li>
+            <a href="{% url 'acceuil' %}">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li class="activate">
+            <a href="{% url 'achat' %}">
+                <i class="fas fa-chart-bar"></i>
+                <span>Achat de devises</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'vente' %}">
+                <i class="fas fa-chart-bar"></i>
+                <span>Vente de devises</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class="fas fa-briefcase"></i>
+                <span>Attestation</span>
+            </a>
+        </li>
+
+        <h2>{{ user.username }} !</h2>
+
+        <li class="logout">
+            <a href="{% url 'deconnexion' %}">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Déconnexion</span>
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+<div class="main--container">
+
+    <div class="header--wrapper">
+
+        <div class="header--tittle">
+            <span>Achat de devises</span>
+            <h2>Salut {{ user.username }}</h2>
+        </div>
+
+    </div>
+
+    <!-- ================= FORMULAIRE ================= -->
+
+   <button onclick="afficherFormulaire()">Ajouter</button>
+
+<div id="formulaire" style="display:none;">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enregistrer</button>
+    </form>
+</div>
+
+<script>
+function afficherFormulaire() {
+    let formulaire = document.getElementById("formulaire");
+
+    if (formulaire.style.display === "none") {
+        formulaire.style.display = "block";
+    } else {
+        formulaire.style.display = "none";
+    }
+}
+</script>
+
+    <br>
+    <hr>
+    <br>
+
+    <!-- ================= TABLEAU ================= -->
+
+    <table border="1" width="100%">
+
+        <thead>
+
+            <tr>
+                <th>Nom_et_Prenom</th>
+                <th>CIN/Passport</th>
+                <th>Devise</th>
+                <th>Cours</th>
+                <th>Actions</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for achat in achats %}
+
+            <tr>
+
+                <td>{{ achat.nom }}</td>
+                <td>{{ achat.numero }}</td>
+                <td>{{ achat.devise }}</td>
+                <td>{{ achat.cours }}</td>
+
+                <td>
+
+                    <a href="{% url 'modifier' achat.id %}">
+                        <button type="button">
+                            Modifier
+                        </button>
+                    </a>
+
+                    <a href="{% url 'supprimer' achat.id %}"
+                       onclick="return confirm('Voulez-vous vraiment supprimer cet achat ?')">
+
+                        <button type="button">
+                            Supprimer
+                        </button>
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="5" style="text-align:center;">
+                    Aucun achat enregistré.
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>
