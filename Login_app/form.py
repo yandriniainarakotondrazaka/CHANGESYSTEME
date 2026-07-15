@@ -17,7 +17,25 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         fields = UserCreationForm.Meta.fields + ("password1","password2")
 
+from django import forms
+from .models import AchatDevises
+
+DEVISES = [
+    ('MGA', 'MGA'),
+    ('USD', 'USD'),
+    ('EUR', 'EUR'),
+    ('GBP', 'GBP'),
+    ('JPY', 'JPY'),
+    ('CAD', 'CAD'),
+    ('CHF', 'CHF'),
+]
+
 class AchatDevisesForm(forms.ModelForm):
+    devise = forms.ChoiceField(
+        choices=DEVISES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
     class Meta:
         model = AchatDevises
-        fields = "__all__"
+        fields = '__all__'

@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="{% static 'css/styleAchat.css' %}?v=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
 
@@ -71,32 +72,48 @@
 
     <!-- ================= FORMULAIRE ================= -->
 
-   <button onclick="afficherFormulaire()">Ajouter</button>
-
-<div id="formulaire" style="display:none;">
+<div class="formulaire">
+    <h2>Formulaire Achat</h2>
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Enregistrer</button>
+
+        <div class="ligne">
+            <div class="champ">
+                <label>Nom_Prenom</label>
+                {{ form.nom }}
+            </div>
+
+            <div class="champ">
+                <label>Numéro Passport/CIN</label>
+                {{ form.numero }}
+            </div>
+        </div>
+
+        <div class="ligne">
+           <label >Devise</label>
+           <select name="devise" class="form-control">
+                <option value="">Sélectionner une devise</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="JPY">JPY</option>
+                <option value="CAD">CAD</option>
+            </select>
+            <div class="champ">
+                <label>Quantité</label>
+                {{ form.quantite }}
+            </div>
+        </div>
+        <div class="ligne">
+            <div class="champ">
+                <label>Cours</label>
+                {{ form.cours }}
+            </div>
+        </div>
+
+        <button type="submit" class="fa-solid fa-floppy-disk">Enregistrer</button>
     </form>
 </div>
-
-<script>
-function afficherFormulaire() {
-    let formulaire = document.getElementById("formulaire");
-
-    if (formulaire.style.display === "none") {
-        formulaire.style.display = "block";
-    } else {
-        formulaire.style.display = "none";
-    }
-}
-</script>
-
-    <br>
-    <hr>
-    <br>
-
     <!-- ================= TABLEAU ================= -->
 
     <table border="1" width="100%">
@@ -107,6 +124,7 @@ function afficherFormulaire() {
                 <th>Nom_et_Prenom</th>
                 <th>CIN/Passport</th>
                 <th>Devise</th>
+                <th>Quantité</th>
                 <th>Cours</th>
                 <th>Actions</th>
             </tr>
@@ -122,26 +140,17 @@ function afficherFormulaire() {
                 <td>{{ achat.nom }}</td>
                 <td>{{ achat.numero }}</td>
                 <td>{{ achat.devise }}</td>
+                <td>{{ achat.quantite }}</td>
                 <td>{{ achat.cours }}</td>
+        <td>
+            <a href="{% url 'modifier' achat.id %}" class="btn-modifier">
+                <i class="fa-solid fa-pen"></i>
+            </a>
 
-                <td>
-
-                    <a href="{% url 'modifier' achat.id %}">
-                        <button type="button">
-                            Modifier
-                        </button>
-                    </a>
-
-                    <a href="{% url 'supprimer' achat.id %}"
-                       onclick="return confirm('Voulez-vous vraiment supprimer cet achat ?')">
-
-                        <button type="button">
-                            Supprimer
-                        </button>
-
-                    </a>
-
-                </td>
+            <a href="{% url 'supprimer' achat.id %}" class="btn-supprimer">
+                <i class="fa-solid fa-trash"></i>
+            </a>
+        </td>
 
             </tr>
 
