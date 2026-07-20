@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/styleAchat.css' %}?v=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -70,11 +71,18 @@
 
     </div>
 
+<button
+   class="btn btn-primary"
+   data-bs-toggle="modal"
+   data-bs-target="ModelAchat"
+>
+Ajouter
+</button> 
     <!-- ================= FORMULAIRE ================= -->
 
 <div class="formulaire">
     <h2>Formulaire Achat</h2>
-    <form method="POST">
+    <form method = "POST">
         {% csrf_token %}
 
         <div class="ligne">
@@ -99,6 +107,7 @@
                 <option value="JPY">JPY</option>
                 <option value="CAD">CAD</option>
             </select>
+            {{ form.devise }}
             <div class="champ">
                 <label>Quantité</label>
                 {{ form.quantite }}
@@ -110,7 +119,6 @@
                 {{ form.cours }}
             </div>
         </div>
-
         <button type="submit" class="fa-solid fa-floppy-disk">Enregistrer</button>
     </form>
 </div>
@@ -171,4 +179,5 @@
 </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </html>

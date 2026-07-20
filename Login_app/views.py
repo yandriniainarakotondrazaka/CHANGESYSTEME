@@ -52,8 +52,12 @@ def achat_devise(request, id=None):
         form = AchatDevisesForm(request.POST, instance=achat)
 
         if form.is_valid():
+            print("formulaire valide")
             form.save()
             return redirect("achat")
+        else:
+            print("Erreur formulaire :", form.errors) 
+
     else:
         form = AchatDevisesForm(instance=achat)
 

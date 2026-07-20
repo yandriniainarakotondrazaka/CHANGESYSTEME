@@ -16,12 +16,12 @@
                     {%endfor%}
                 </div>
             {%endif%}
-            <form method="post" action="{% url 'connexion' %}">
+            <form method="post" action="{% url 'connexion' %}" autocomplete="off">
                 {% csrf_token %}
                 <label for="username">Nom d'utilisateur</label>
-                <input type="text" name="username" required>
-                <label for="password">Mot de passe</label>
-                <input type="password" name="password" required> 
+                <input type="text" name="username" required autocomplete="username">
+                <label for="password" autocomplete="off">Mot de passe</label>
+                <input type="password" name="password" required autocomplete="current-password">
                 <button type="submit">Se connecter</button>
             </form>
             <p class="link">Pas encore inscrit ? <a href="{% url 'inscription' %}">S'inscrire</a></p>
